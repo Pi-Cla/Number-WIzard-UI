@@ -14,26 +14,24 @@ public class NumberWizard : MonoBehaviour
     void Start()
     {
         //This is the equation to determine the computer's next geuss
-        computerGeuss = (max + min) / 2;
+        //The do while loop ensures if the geuss is higher then max or lower then min it will redo
+        do {
+            computerGeuss = Random.Range(min, max - 1);
+        } while (computerGeuss > max | computerGeuss < min);
+        
         //Display the geuss onto the screen
         geussText.text = computerGeuss.ToString();
-        //Add 1 to max so computer can geuss the max number
-        max++;
-
-        
     }
 
     public void OnPressHigher() {
         //Minimum number is the previous geuss
-            min = computerGeuss;
-            computerGeuss = (max + min) / 2;
-            geussText.text = computerGeuss.ToString();
+            min = computerGeuss + 1;
+            Start();
     }
 
     public void OnPressLower() {
         //Maximum number is the previous geuss
-            max = computerGeuss;
-            computerGeuss = (max + min) / 2;
-            geussText.text = computerGeuss.ToString();
+            max = computerGeuss - 1;
+            Start();
     }
 }
